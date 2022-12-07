@@ -1,34 +1,36 @@
 import * as React from 'react'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
 import Head from 'next/head'
 import Image from 'next/image'
-import Box from '@mui/material/Box'
+import OrdersTable from '../components/OrdersTable'
+import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import useApp from '../hooks/useApp'
-import OrdersTable from '../components/OrdersTable'
+import CreateOrder from '../components/CreateOrder'
 
 export default function Home() {
-	const { isAuth, orders, logout } = useApp()
-
-	React.useEffect(() => {}, [])
-
+	const { orders } = useApp()
 	return (
 		<>
 			<Head>
-				<title>InstaYa</title>
+				<title>InstaYa - Ordenes</title>
 				<meta name='description' content='Aplicación de envio de paquetes y mercancia.' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Box>
-				<Typography>Ordenes</Typography>
-				<Stack>
-					<Button variant='contained' >Crear nueva orden</Button>
-					<Button variant='contained' onClick={logout}>Cerrar sesión</Button>
-				</Stack>
+			<Paper>
+				<Box sx={{ p: 2 }}>
+					<Stack direction='row' justifyContent='space-between'>
+						<Typography variant='h4'>Ordenes</Typography>
+						<CreateOrder />
+					</Stack>
+				</Box>
+				<Divider />
 				<OrdersTable orders={orders} />
-			</Box>
+			</Paper>
 		</>
 	)
 }
